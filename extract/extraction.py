@@ -59,8 +59,16 @@ def get_df(path):
     emails=[]
     ph_no=[]
     for doc in text:
-        emails.append(extract_email_addresses(doc)[0])
-        ph_no.append(extract_phone_numbers(doc)[0])
+        email=extract_email_addresses(doc)
+        if len(email)>0:
+            emails.append(email[0])
+        else:
+            emails.append([])
+        pn=extract_phone_numbers(doc)
+        if len(pn)>0:
+            ph_no.append(pn[0])
+        else:
+            ph_no.append([])
     data={'Email':emails,
           'phone_number':ph_no,
           'text':text}
