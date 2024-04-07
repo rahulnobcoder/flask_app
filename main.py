@@ -43,6 +43,7 @@ def download_file():
     df = get_df(path)
     df.to_excel('details.xlsx', index=False)
     file_path = 'details.xlsx'
+    clear_folder_contents("uploads")
     return send_file(file_path, as_attachment=True)
 
 if __name__ == '__main__':
