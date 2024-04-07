@@ -66,3 +66,23 @@ def get_df(path):
           'text':text}
     df = pd.DataFrame(data)
     return df
+
+def clear_folder_contents(folder_path):
+    # Check if the path exists and is a directory
+    if os.path.exists(folder_path) and os.path.isdir(folder_path):
+        # Iterate over all files and subdirectories in the folder
+        for item in os.listdir(folder_path):
+            item_path = os.path.join(folder_path, item)
+            # Check if the item is a file
+            if os.path.isfile(item_path):
+                # Remove the file
+                os.remove(item_path)
+                print(f"File '{item_path}' removed.")
+            # Check if the item is a directory
+            elif os.path.isdir(item_path):
+                # Remove the subdirectory and its contents recursively
+                shutil.rmtree(item_path)
+                print(f"Folder '{item_path}' and its contents removed.")
+        print(f"All contents of folder '{folder_path}' cleared successfully.")
+    else:
+        print(f"Folder '{folder_path}' does not exist or is not a directory.")
